@@ -8,9 +8,13 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
+            // Downloaded at build time and served from public/build (no font CDN at runtime).
+            // One font covers Bangla and English; 2 weights keep the page light.
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                bunny('Hind Siliguri', {
+                    weights: [400, 600],
+                    subsets: ['bengali', 'latin'],
+                    preload: [{ weight: 400 }],
                 }),
             ],
         }),
