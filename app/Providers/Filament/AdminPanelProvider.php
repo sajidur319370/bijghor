@@ -33,7 +33,8 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('BijGhor Admin')
             ->defaultAvatarProvider(InitialsAvatarProvider::class)   // no ui-avatars.com requests
             ->colors([
-                'primary' => Color::hex('#2f7d32'),   // storefront brand green
+                // Built-in palette: a hex colour produced pale buttons with poor text contrast
+                'primary' => Color::Green,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
