@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
 use App\Models\DeliveryZone;
+use App\Models\Order;
 use App\Services\Cart;
 use App\Services\PlaceOrder;
 use Illuminate\Http\RedirectResponse;
@@ -32,5 +33,28 @@ class CheckoutController extends Controller
         $order = $placeOrder->handle($request->validated(), $cart);
 
         return redirect()->route('order.pay', $order->order_number);
+    }
+
+    /** Thank-you page. Shows no personal details (name, phone, address), only what was ordered. */
+    public function success(string $number): View|RedirectResponse
+    {
+        $order = Order::with('items')->where('order_number', $number)->firstOrFail();
+
+        if ($order->payment_status !== 'paid' || $order->status === 'cancelled') {
+            return redirect()->route('checkout.failed', $order->order_number);
+        }
+
+        return view('checkout.success', ['order' => $order]);
+    }
+
+    public function failed(string $number): View|RedirectResponse
+    {
+        $order = Order::with('items')->where('order_number', $number)->firstOrFail();
+
+        if ($order->payment_status === 'paid' && $order->status !== 'cancelled') {
+            return redirect()->route('checkout.success', $order->order_number);
+        }
+
+        return view('checkout.failed', ['order' => $order]);
     }
 }
