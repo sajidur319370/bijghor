@@ -1,5 +1,4 @@
-{{-- $navCategories comes from the view composer in AppServiceProvider. --}}
-@php($cartCount = array_sum(session('cart', [])))
+{{-- $navCategories and $cartCount come from the view composer in AppServiceProvider. --}}
 @php($cartTag = Route::has('cart') ? 'a' : 'span')
 
 <header x-data="{ open: false }" class="sticky top-0 z-30 border-b border-gray-200 bg-white/95 backdrop-blur">

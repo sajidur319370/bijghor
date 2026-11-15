@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Services\Cart;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -26,7 +27,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultSimpleView('pagination');
 
         View::composer('components.header', function ($view): void {
-            $view->with('navCategories', Category::active()->orderBy('sort_order')->get());
+            $view->with([
+                'navCategories' => Category::active()->orderBy('sort_order')->get(),
+                'cartCount' => $this->app->make(Cart::class)->count(),
+            ]);
         });
     }
 }
