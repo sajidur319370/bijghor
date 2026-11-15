@@ -3,15 +3,18 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasTranslations;
+use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['name_en', 'name_bn', 'slug', 'image', 'sort_order', 'is_active'])]
 class Category extends Model
 {
-    use HasTranslations;
+    /** @use HasFactory<CategoryFactory> */
+    use HasFactory, HasTranslations;
 
     protected array $translatable = ['name'];
 
