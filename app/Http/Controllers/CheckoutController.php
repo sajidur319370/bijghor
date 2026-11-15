@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CancelStaleOrders;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\DeliveryZone;
 use App\Models\Order;
@@ -12,8 +13,11 @@ use Illuminate\View\View;
 
 class CheckoutController extends Controller
 {
-    public function show(Cart $cart): View|RedirectResponse
+    public function show(Cart $cart, CancelStaleOrders $cancelStaleOrders): View|RedirectResponse
     {
+        // No cron on free hosting: free up stock held by abandoned orders before checking out
+        $cancelStaleOrders->handle();
+
         $notices = $cart->sync();
 
         if ($cart->isEmpty()) {
