@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 #[Fillable([
     'category_id', 'name_en', 'name_bn', 'slug', 'sku', 'description_en', 'description_bn',
@@ -62,6 +63,12 @@ class Product extends Model
     protected function isOnSale(): Attribute
     {
         return Attribute::get(fn () => $this->sale_price !== null);
+    }
+
+    /** Public URL of the main image on the `uploads` disk, or null when there is none. */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::get(fn () => $this->image ? Storage::disk('uploads')->url($this->image) : null);
     }
 
     /** Active and not soft-deleted (SoftDeletes already hides deleted rows). */
