@@ -35,4 +35,20 @@ return [
         ],
     ],
 
+    /*
+    | Payments (docs §1.8). "demo" needs nothing outside the server and is the
+    | safe default; "bkash_sandbox" uses bKash's test API (test money only).
+    */
+    'payment' => [
+        'driver' => env('PAYMENT_DRIVER', 'demo'),
+    ],
+
+    'bkash' => [
+        'base_url' => env('BKASH_BASE_URL', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized/checkout'),
+        'app_key' => env('BKASH_APP_KEY'),
+        'app_secret' => env('BKASH_APP_SECRET'),
+        'username' => env('BKASH_USERNAME'),
+        'password' => env('BKASH_PASSWORD'),
+    ],
+
 ];

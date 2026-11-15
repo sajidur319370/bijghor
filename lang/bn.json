@@ -95,5 +95,13 @@
     "Only :count of :name left, so we lowered the quantity.": ":name মাত্র :countটি বাকি, তাই পরিমাণ কমিয়ে দেওয়া হয়েছে।",
     ":name is out of stock": ":name এর স্টক শেষ",
     "You already have unpaid orders. Please pay for them or wait for them to expire.": "আপনার কয়েকটি অর্ডারের পেমেন্ট এখনো বাকি। সেগুলোর পেমেন্ট করুন অথবা মেয়াদ শেষ হওয়া পর্যন্ত অপেক্ষা করুন।",
-    "bKash is unavailable, please try again": "বিকাশ এখন পাওয়া যাচ্ছে না, আবার চেষ্টা করুন"
+    "bKash is unavailable, please try again": "বিকাশ এখন পাওয়া যাচ্ছে না, আবার চেষ্টা করুন",
+    "Demo payment": "ডেমো পেমেন্ট",
+    "DEMO PAYMENT": "ডেমো পেমেন্ট",
+    "No real money is charged. Choose what should happen:": "কোনো আসল টাকা কাটা হবে না। কী ঘটবে বেছে নিন:",
+    "Order number": "অর্ডার নম্বর",
+    "Amount": "পরিমাণ",
+    "Pay (demo)": "পেমেন্ট করুন (ডেমো)",
+    "Fail": "ব্যর্থ",
+    "Cancel": "বাতিল"
 }

@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Payments\BkashSandbox;
+use App\Payments\DemoGateway;
+use App\Payments\PaymentGateway;
 use App\Services\Cart;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -15,7 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // PAYMENT_DRIVER=demo → demo page on this site; anything else → bKash sandbox (docs §1.8)
+        $this->app->bind(PaymentGateway::class, fn ($app) => config('services.payment.driver') === 'demo'
+            ? $app->make(DemoGateway::class)
+            : $app->make(BkashSandbox::class));
     }
 
     /**
