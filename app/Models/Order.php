@@ -49,6 +49,51 @@ class Order extends Model
         return $number;
     }
 
+    /**
+     * Status changes from the admin panel. Each one only applies from the expected state
+     * (a single conditional UPDATE), so a double click or two staff members can't skip steps.
+     *
+     * @return bool whether the order changed
+     */
+    public function markShipped(): bool
+    {
+        return $this->moveStatus(from: 'confirmed', to: 'shipped');
+    }
+
+    public function markDelivered(): bool
+    {
+        return $this->moveStatus(from: 'shipped', to: 'delivered');
+    }
+
+    /** Paid after auto-cancel (docs §5.8): record that the money was returned. */
+    public function markRefunded(): bool
+    {
+        $changed = self::whereKey($this->id)
+            ->where('status', 'cancelled')
+            ->where('payment_status', 'paid')
+            ->update(['payment_status' => 'refunded']) === 1;
+
+        if ($changed) {
+            $this->payments()->where('status', 'completed')->update(['status' => 'refunded']);
+            $this->refresh();
+        }
+
+        return $changed;
+    }
+
+    public function needsRefund(): bool
+    {
+        return $this->status === 'cancelled' && $this->payment_status === 'paid';
+    }
+
+    private function moveStatus(string $from, string $to): bool
+    {
+        $changed = self::whereKey($this->id)->where('status', $from)->update(['status' => $to]) === 1;
+        $this->refresh();
+
+        return $changed;
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
