@@ -66,4 +66,18 @@ class Product extends Model
     {
         $query->where('is_active', true);
     }
+
+    /**
+     * Name contains the term, in Bangla or English. % and _ typed by the
+     * visitor are matched literally. "!" is the escape character because it
+     * behaves the same in MySQL and SQLite (backslash does not).
+     */
+    public function scopeSearch(Builder $query, string $term): void
+    {
+        $like = '%'.str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $term).'%';
+
+        $query->where(fn (Builder $where) => $where
+            ->whereRaw("name_en LIKE ? ESCAPE '!'", [$like])
+            ->orWhereRaw("name_bn LIKE ? ESCAPE '!'", [$like]));
+    }
 }
