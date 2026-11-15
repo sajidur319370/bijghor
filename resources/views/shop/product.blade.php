@@ -1,4 +1,10 @@
-<x-layouts.app :title="$product->name.' — '.$product->category->name">
+<x-layouts.app :title="$product->name.' — '.$product->category->name" type="product" :image="$product->image_url"
+    :description="$product->description ?: __(':name seeds, :size packet. Sowing season: :season.', ['name' => $product->name, 'size' => $product->packet_size, 'season' => $product->sowing_season])">
+    <x-slot:head>
+        <meta property="product:price:amount" content="{{ $product->effective_price }}">
+        <meta property="product:price:currency" content="BDT">
+        <meta property="product:availability" content="{{ $product->stock > 0 ? 'in stock' : 'out of stock' }}">
+    </x-slot:head>
     <div class="mx-auto max-w-6xl px-4 py-6">
         <x-breadcrumbs :items="[
             $product->category->name => route('category', $product->category->slug),

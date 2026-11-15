@@ -1,4 +1,6 @@
-<x-layouts.app :title="$category->name">
+<x-layouts.app :title="$category->name"
+    :description="__('Buy :category online: :count seeds, each with sowing season and germination rate.', ['category' => $category->name, 'count' => bn_digits($products->total())])"
+    :image="$category->image ? Storage::disk('uploads')->url($category->image) : null">
     <div class="mx-auto max-w-6xl px-4 py-6">
         <x-breadcrumbs :items="[$category->name => null]" />
 

@@ -1,6 +1,9 @@
 {
     "BijGhor": "বীজঘর",
     "Seeds for every garden": "প্রতিটি বাগানের জন্য বীজ",
+    "Buy vegetable, flower, fruit and herb seeds online in Bangladesh. Every packet shows the sowing season and germination rate.": "বাংলাদেশে অনলাইনে সবজি, ফুল, ফল ও ভেষজের বীজ কিনুন। প্রতিটি প্যাকেটে বোনার মৌসুম আর অঙ্কুরোদগমের হার দেওয়া আছে।",
+    "Buy :category online: :count seeds, each with sowing season and germination rate.": "অনলাইনে :category কিনুন: :countটি বীজ, প্রতিটির বোনার মৌসুম আর অঙ্কুরোদগমের হারসহ।",
+    ":name seeds, :size packet. Sowing season: :season.": ":name বীজ, :size প্যাকেট। বোনার মৌসুম: :season।",
     "Menu": "মেনু",
     "Language": "ভাষা",
     "About": "আমাদের কথা",

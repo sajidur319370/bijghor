@@ -1,4 +1,4 @@
-<x-layouts.app :title="$term !== '' ? __('Search: :term', ['term' => $term]) : __('All seeds')">
+<x-layouts.app :title="$term !== '' ? __('Search: :term', ['term' => $term]) : __('All seeds')" :noindex="true">
     <div class="mx-auto max-w-6xl px-4 py-6">
         <x-breadcrumbs :items="[__('Search') => null]" />
 
