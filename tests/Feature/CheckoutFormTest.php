@@ -77,7 +77,7 @@ class CheckoutFormTest extends TestCase
     {
         foreach (['০১৭১২৩৪৫৬৭৮', '+880 1712-345678'] as $phone) {
             $this->post(route('checkout.store'), $this->validForm(['phone' => $phone]))
-                ->assertSessionDoesntHaveErrors();
+                ->assertSessionDoesntHaveErrors('phone');
         }
     }
 

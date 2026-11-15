@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\DeliveryZone;
 use App\Services\Cart;
+use App\Services\PlaceOrder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -26,9 +27,10 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(CheckoutRequest $request): RedirectResponse
+    public function store(CheckoutRequest $request, Cart $cart, PlaceOrder $placeOrder): RedirectResponse
     {
-        // Placing the order comes in the next step (PlaceOrder service).
-        return back()->withInput();
+        $order = $placeOrder->handle($request->validated(), $cart);
+
+        return redirect()->route('order.pay', $order->order_number);
     }
 }

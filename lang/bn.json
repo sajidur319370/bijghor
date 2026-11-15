@@ -94,5 +94,6 @@
     "A seed in your cart is no longer available and was removed.": "কার্টের একটি বীজ আর পাওয়া যাচ্ছে না, তাই বাদ দেওয়া হয়েছে।",
     "Only :count of :name left, so we lowered the quantity.": ":name মাত্র :countটি বাকি, তাই পরিমাণ কমিয়ে দেওয়া হয়েছে।",
     ":name is out of stock": ":name এর স্টক শেষ",
+    "You already have unpaid orders. Please pay for them or wait for them to expire.": "আপনার কয়েকটি অর্ডারের পেমেন্ট এখনো বাকি। সেগুলোর পেমেন্ট করুন অথবা মেয়াদ শেষ হওয়া পর্যন্ত অপেক্ষা করুন।",
     "bKash is unavailable, please try again": "বিকাশ এখন পাওয়া যাচ্ছে না, আবার চেষ্টা করুন"
 }

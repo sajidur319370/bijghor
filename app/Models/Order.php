@@ -25,6 +25,25 @@ class Order extends Model
         ];
     }
 
+    /**
+     * Readable, hard-to-guess order number like BG-261115-7K3QD. Leaves out 0/O and 1/I
+     * so customers can read it back over the phone.
+     */
+    public static function newOrderNumber(): string
+    {
+        $alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+        do {
+            $suffix = '';
+            for ($i = 0; $i < 5; $i++) {
+                $suffix .= $alphabet[random_int(0, strlen($alphabet) - 1)];
+            }
+            $number = 'BG-'.now()->format('ymd').'-'.$suffix;
+        } while (self::where('order_number', $number)->exists());
+
+        return $number;
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
