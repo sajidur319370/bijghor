@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -28,6 +29,19 @@ class LayoutTest extends TestCase
             ->assertSee('<html lang="en">', false)
             ->assertSee('BijGhor')
             ->assertDontSee('বীজঘর');
+    }
+
+    public function test_demo_banner_is_on_every_page_in_the_current_language(): void
+    {
+        Product::factory()->create(['slug' => 'tomato']);
+
+        foreach ([route('home'), route('product', 'tomato'), route('cart'), route('search')] as $url) {
+            $this->get($url)->assertSee('ডেমো শপ: কোনো আসল টাকা কাটা হবে না');
+        }
+
+        $this->withSession(['locale' => 'en'])
+            ->get(route('home'))
+            ->assertSee('Demo shop: no real money is charged');
     }
 
     public function test_unknown_language_is_not_found(): void

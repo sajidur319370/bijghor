@@ -40,6 +40,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="flex min-h-screen flex-col bg-white leading-relaxed text-gray-800 antialiased">
+        <x-demo-banner />
         <x-header />
         <x-flash />
 
