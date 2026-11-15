@@ -181,8 +181,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'phone' => [
+            'regex' => 'Enter a Bangladeshi mobile number, like 01712345678.',
         ],
     ],
 
@@ -197,6 +197,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'phone' => 'mobile number',
+        'delivery_zone_id' => 'delivery area',
+        'order_number' => 'order number',
+        'qty' => 'quantity',
+    ],
 
 ];
