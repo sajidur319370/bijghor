@@ -23,6 +23,9 @@
             <meta name="robots" content="noindex, follow">
         @endif
         <meta name="theme-color" content="#2f7d32">
+        <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+        <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="32x32">
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
         {{-- Open Graph: link previews on Facebook / WhatsApp --}}
         <meta property="og:site_name" content="{{ __('BijGhor') }}">

@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->profile()     // the owner can change their own email and password
             ->brandName('BijGhor Admin')
+            ->favicon(asset('favicon.svg'))
             ->defaultAvatarProvider(InitialsAvatarProvider::class)   // no ui-avatars.com requests
             ->colors([
                 // Built-in palette: a hex colour produced pale buttons with poor text contrast
