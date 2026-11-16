@@ -8,6 +8,7 @@ use App\Payments\DemoGateway;
 use App\Payments\PaymentGateway;
 use App\Services\Cart;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->forceHttpsUrlsInProduction();
+
         Paginator::defaultView('pagination');
         Paginator::defaultSimpleView('pagination');
 
@@ -38,5 +41,16 @@ class AppServiceProvider extends ServiceProvider
                 'cartCount' => $this->app->make(Cart::class)->count(),
             ]);
         });
+    }
+
+    /**
+     * Shared hosting may not tell PHP the visitor used HTTPS. Without this, CSS/JS/form URLs
+     * would be generated as http:// and browsers would block them as mixed content.
+     */
+    private function forceHttpsUrlsInProduction(): void
+    {
+        if ($this->app->isProduction() && str_starts_with((string) config('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
     }
 }
