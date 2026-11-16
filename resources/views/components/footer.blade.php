@@ -23,6 +23,14 @@
             @endforeach
         </ul>
 
-        <p>&copy; {{ bn_digits(now()->year) }} {{ __('BijGhor') }}</p>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+            @if (config('shop.contact.facebook'))
+                <a href="{{ config('shop.contact.facebook') }}" rel="noopener" target="_blank" class="inline-block py-1 hover:text-brand-700">Facebook</a>
+            @endif
+            @if (config('shop.contact.phone'))
+                <a href="tel:{{ config('shop.contact.phone') }}" class="inline-block py-1 hover:text-brand-700">{{ bn_digits(config('shop.contact.phone')) }}</a>
+            @endif
+            <p>&copy; {{ bn_digits(now()->year) }} {{ __('BijGhor') }}</p>
+        </div>
     </div>
 </footer>

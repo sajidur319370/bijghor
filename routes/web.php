@@ -33,6 +33,13 @@ Route::get('/order/failed/{number}', [CheckoutController::class, 'failed'])->nam
 Route::match(['get', 'post'], '/track', TrackController::class)
     ->middleware('throttle:10,1')->name('track');
 
+// Static pages (Bangla + English inside each view)
+Route::view('/about', 'pages.about')->name('about');
+Route::view('/contact', 'pages.contact')->name('contact');
+Route::view('/terms', 'pages.terms')->name('terms');
+Route::view('/privacy', 'pages.privacy')->name('privacy');
+Route::view('/refund-policy', 'pages.refund-policy')->name('refund-policy');
+
 // Language switch: /lang/bn or /lang/en (anything else is a 404)
 Route::get('/lang/{locale}', function (string $locale) {
     session(['locale' => $locale]);
